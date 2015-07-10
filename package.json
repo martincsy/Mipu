@@ -1,0 +1,17 @@
+{
+    "name":"mipu",
+    "version":"1.0.0",
+    "description": "Mipu is a system to make the school's staff work be entirely electronic",
+    "main": "app.js",
+    "scripts":{
+        "start":"node app.js"
+    },
+
+    "author":"martincsy@outlook.com",
+    "dependencies":{
+        "express":"4.11.1",
+        "mysql":"2.5.4",
+        "jade":"1.9.1",
+        "sprintf-js" : "1.0.2"
+    }
+}
