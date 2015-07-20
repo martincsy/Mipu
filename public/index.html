@@ -18,8 +18,8 @@
     <link href="css/navbar.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]
+    <script src="js/ie-emulation-modes-warning.js"></script> -->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -73,11 +73,79 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
+        <h1>新职工</h1>
+        <form class="form-horizontal" role="form">
+           <div class="form-group">
+              <label for="seq" class="col-sm-2 control-label">序号</label>
+              <div class="col-sm-10">
+                 <input type="text" class="form-control mask-seq" id="seq" name="seq"
+                    placeholder="序号不能重复，每学期可变化">
+              </div>
+           </div>
+           <div class="form-group">
+              <label for="name" class="col-sm-2 control-label">姓名</label>
+              <div class="col-sm-10">
+                 <input type="text" class="form-control" id="name" name="name"
+                    placeholder="请输入姓名">
+              </div>
+           </div>
+           <div class="form-group">
+              <label for="id" class="col-sm-2 control-label">身份证</label>
+              <div class="col-sm-10">
+                 <input type="text" class="form-control mask-id" id="id" name="id"
+                    placeholder="请输入身份证，将作为系统唯一标示">
+              </div>
+           </div>          
+           <div class="form-group">
+              <label for="gender" class="col-sm-2 control-label">性别</label>
+              <div class="col-sm-10">
+                <select class="form-control" id="gender" name="gender">
+                   <option value="M">男</option>
+                   <option value="F">女</option>
+                </select>
+              </div>
+           </div>
+           <div class="form-group">
+              <label for="phone" class="col-sm-2 control-label">手机</label>
+              <div class="col-sm-10">
+                 <input type="text" class="form-control mask-phone" id="phone" name="phone"
+                    placeholder="请输入手机号码">
+              </div>
+           </div>
+           <div class="form-group">
+              <label for="address" class="col-sm-2 control-label">家庭地址</label>
+              <div class="col-sm-10">
+                 <input type="text" class="form-control" id="address" name="address"
+                    placeholder="请输入家庭住址">
+              </div>
+           </div>           
+           <div class="form-group">
+              <label for="birthday" class="col-sm-2 control-label">出生年月</label>
+              <div class="col-sm-10">
+                 <input type="text" class="form-control mask-date" id="birthday" name="birthday"
+                    placeholder="输入比如19840705，会自动格式化成1984/07/05">
+              </div>
+           </div>
+           <div class="form-group">
+              <label for="workday" class="col-sm-2 control-label">参加工作年月</label>
+              <div class="col-sm-10">
+                 <input type="text" class="form-control mask-date" id="workday" name="workday"
+                    placeholder="">
+              </div>
+           </div>
+           <div class="form-group">
+              <label for="hireday" class="col-sm-2 control-label">聘任工作年月</label>
+              <div class="col-sm-10">
+                 <input type="text" class="form-control mask-date" id="hireday" name="hireday"
+                    placeholder="">
+              </div>
+           </div>                                                                   
+           <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                 <button id="submit" class="btn btn-default">创建</button>
+              </div>
+           </div>
+        </form>
       </div>
 
     </div> <!-- /container -->
@@ -88,7 +156,29 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug 
+    <script src="js/ie10-viewport-bug-workaround.js"></script> -->
+    <script src="js/input-mask.min.js"></script> <!-- Input Mask -->
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+            /* Input Masking - you can include your own way */
+            (function(){
+                    $('.mask-seq').mask('00000000');
+                    $('.mask-date').mask('0000-00-00');
+                    $('.mask-phone').mask('000-0000-0000');
+                    $('.mask-id').mask('000000-0000-0000-0000');
+            })();
+
+            $("button").on('click',function(e){
+                    e.preventDefault();
+                    var data = {};
+                    $('form').serializeArray().map(function(x){
+                        data[x.name] = x.value;
+                    });
+                    console.log(data); 
+            });
+    });
+    </script>
   </body>
 </html>

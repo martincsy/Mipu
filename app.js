@@ -14,6 +14,8 @@ var mysql = require('mysql');
 
 var globalConfig = require('./helpers/config');
 
+var service = require('./service/service');
+
 var server = app.listen(globalConfig.DeployInfo.port, function(){
     var host = server.address().address;
     var port = server.address().port;
@@ -25,14 +27,14 @@ app.use("/", express.static(globalConfig.DeployInfo.root + '/public', {
     maxAge : 86400000
 }));
 
-// app.get('/rest/riskauthenticationserv', handleDashboard);
-// app.get('/rest/flows', getAllFlows);
+app.get('/', function(req, res){
+    res.send(fs.readFileSync('./public/index.html', 'utf-8'));
+});
+app.get('/salary/:time/:staff', getSalary);
 // app.get('/rest/flows/:id', getFlowDetail);
 // app.get('/rest/flows/:id/ramp', getFlowRamp);
 // app.get('/rest/fn', getFraudnet);
-// app.get('/', function(req, res){
-//     res.send(fs.readFileSync('./public/index.html', 'utf-8'));
-// });
+
 
 //create connection pool
 var connPool = mysql.createPool({
@@ -46,13 +48,9 @@ var connPool = mysql.createPool({
 });
 
 
-// function handleDashboard(req, res) {
-//     dshService.handleFetchDBData(req, res, connPool);
-// }
-
-// function getAllFlows(req, res){
-//     riskRestService.getAllFlows(req, res, connPool);
-// }
+function getSalary(req, res){
+     service.getSalary(req, res, connPool, req.params.time, req.params.staff);
+}
 
 // function getFlowDetail(req, res){
 //     riskRestService.getFlowDetail(req, res, connPool, req.params.id);
